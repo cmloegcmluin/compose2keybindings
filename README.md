@@ -106,18 +106,6 @@ This is nothing but a JSON adaptation for Karabiner-Elements of the XML configur
 
 You're ready to go! You don't even need to restart your computer. All you need to do to test them out is open an unopen application (or close and re-open one that you already have open). The key bindings get loaded on an application by application basis, whenever the app is opened.
 
-# Limitations
-
-## No "Advanced Unicode input"
-
-One cool feature that WinCompose supports is "Advanced Unicode input", which lets you insert any Unicode symbol by its code point, preceded by <kbd>⎄</kbd><kbd>U</kbd> and followed by <kbd>Space</kbd>. This is really nice to have available sometimes. Now, if we wanted to simulate this feature on Mac with keybindings, we'd have to define one key binding for each code point! It's certainly doable, but I'm not feeling up to it right now. 
-
-## No commented out compose rules
-
-Sometimes we want to keep around old rules as comments to remind us of other things we considered. And it would be nice if those translated into the Cocoa key bindings file. But I haven't taken care of this yet. You'll notice how the X11 compose rules file is flat, but the Cocoa key bindings file is nested, which causes some re-ordering of the sequences, but that shouldn't make this too much of a problem, I hope; as long as the commented out lines remain sorted as they would be if they weren't commented out.
-
-Mainly I'm worried about how to include the commented-out rules in the same structure as the non-commented-out rules, without messing with the logic of interception/conflicting rules. Also, the output logic would need to be changed, or some way to edit stuff that has already been output, since the commented out line would need to contain the final key of the sequence which starts the line but has already been output, in case it opened a new hash.
-
 # Precedents / alternatives
 
 ## Mac-Ompose
@@ -134,15 +122,39 @@ Mainly I'm worried about how to include the commented-out rules in the same stru
 
 # About my compose rules
 
+## Custom rules in collaboration with Dave Keenan
+
 I had developed an admittedly intense compose rules file over the past several years of working with WinCompose, after my regular collaborator [Dave Keenan](https://dkeenan.com/) turned me onto it. Actually, he's done way more with it than I have, so most of the credit for these rules must be given to Dave.
 
-As explained above, I also needed to include all the rules that are built-in to WinCompose, or at least my best attempt at simulating them from materials cobbled across the internet (including old files in the WinCompose repo's history), since these rules are not directly available anymore out of the program, such as by exporting. I had to make some mods to them to avoid conflicts; Sam had noted that they did conflict, and I ironed those out. 
+## Built-in WinCompose rules
+
+As explained above, I also needed to include all the rules that are built-in to WinCompose, or at least my best attempt at simulating them from materials cobbled across the internet (including old files in the WinCompose repo's history), since these rules are not directly available anymore out of the program, such as by exporting. Sam now embeds them into the .exe.
+
+I had to make some mods to them to avoid conflicts; Sam had noted that they did conflict, and I ironed those out. 
+
+## Deleted dead keys
 
 I also deleted all the dead keys. Bob's script didn't handle those. Perhaps they don't work with key bindings. I see these are important to some languages, but I can't be bothered to figure it out.
 
+## Included Mac-Ompose rules
+
 I also included the extra rules that the Mac-Ompose project uses that weren't in the Xorg rules. 
 
-And I included the Fraktur and parens files from Kragen Javier Sitaker's XCompose project. The dotXCompose file there was almost identical to the xCompose file in the final snapshot from the WinCompose repo.
+## Included Kragen's rules
+
+And I included the paren files from Kragen Javier Sitaker's XCompose project. The dotXCompose file there was almost identical to the xCompose file in the [final snapshot from the WinCompose repo](https://github.com/samhocevar/wincompose/commit/25477177bb3566d3482bd52140ccfb071ac36c8e#diff-df20d61e31338c7d0d081d67465b77778c3e9240ea21f42ca6fcca857fd780f4). Dave and I had already covered frakturs in our own way.
+
+## Added "Advanced Unicode input"
+
+One cool feature that WinCompose supports is "Advanced Unicode input", which lets you insert any Unicode symbol by its code point, preceded by <kbd>⎄</kbd><kbd>U</kbd> and followed by <kbd>Space</kbd>. This is really nice to have available sometimes. To simulate this feature on Mac with keybindings, we need to define one key binding for each code point! So that's what I did, all the way up through Unicode's [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane).
+
+This increases the number of key bindings by an order of magnitude. On my machine it doesn't seem to impact performance. But if you find otherwise, removing these (at the bottom) would be a good way to correct for that.
+
+## Changed spelled-out special characters to special characters where I could
+
+... e.g. `<at>` could become `<@>`. 
+
+For purposes of this conversion, `<colon>` can become `<:>`, however, there is a bug in WinCompose which causes rules with `<:>` instead of `<colon>` to break, so I kept these as `<colon>`. 
 
 # Revisions
 
@@ -184,7 +196,7 @@ I had several compose rules that inserted a short sequence of characters, so I c
 
 ## 3. Handle compose rules which insert 5-digit Unicode characters
 
-Basic [Unicode](https://home.unicode.org/) characters need only four hexadecimal digits in their code point, such as `U+F710`, but many of the more advanced Unicode characters that my compose rules inserted need five, such as `U+1D40A`. These fall outside Unicode's [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane), and therefore they are not directly supported in certain environments, which apparently include this Perl script and/or Cocoa key bindings. So instead here, we have to represent these 5-digit Unicodes by their "surrogate pair" in UTF-16. I revised the script to do this. 
+Basic [Unicode](https://home.unicode.org/) characters need only four hexadecimal digits in their code point, such as `U+F710`, but many of the more advanced Unicode characters that my compose rules inserted need five, such as `U+1D40A`. These fall outside Unicode's BMP, and therefore they are not directly supported in certain environments, which apparently include this Perl script and/or Cocoa key bindings. So instead here, we have to represent these 5-digit Unicodes by their "surrogate pair" in UTF-16. I revised the script to do this. 
 
 ## 4. Handle Cocoa modifier keys
 
@@ -245,3 +257,17 @@ The script also now similarly errors if you define two compose rules with the sa
 ## 10. Include additional X11 Keysym groups
 
 The compose rules built in to WinCompose included a group that isn't included in the [`X11::Keysyms` module](https://metacpan.org/pod/X11::Keysyms), despite being included in the X11 Window System Protocol" standard. I added them manually, and you can follow the pattern I set if you need to need to add more yourself (all revisions to the Perl code are marked with a comment including their revision number, so just search `# REVISION 10` and you'll find this one).
+
+# Possible future features
+
+## Include entire commented out lines
+
+Sometimes we want to keep around old rules as comments to remind us of other things we considered. And it would be nice if those translated into the Cocoa key bindings file. But I haven't taken care of this yet. You'll notice how the X11 compose rules file is flat, but the Cocoa key bindings file is nested, which causes some re-ordering of the sequences, but that shouldn't make this too much of a problem, I hope; as long as the commented out lines remain sorted as they would be if they weren't commented out.
+
+Mainly I'm worried about how to include the commented-out rules in the same structure as the non-commented-out rules, without messing with the logic of interception/conflicting rules. Also, the output logic would need to be changed, or some way to edit stuff that has already been output, since the commented out line would need to contain the final key of the sequence which starts the line but has already been output, in case it opened a new hash. Well, I spent a weekend afternoon on it, and I got most of the way there, but it was just getting too gnarly and making the code too disgusting, so I backed away. Just not worth it. Maybe if someone can write Perl fluently and wants to take a crack at it, please be my guest. 
+
+I think that the tree structure of the key bindings file could actually be advantageous for understanding rules and their relations, so it would be nice if we could carry over commented-out rules into that structure.
+
+## Tests
+
+I suppose there should be some tests, e.g. to make sure some compose rules file (containing minimum reproducible examples of all happy paths and edge cases) maps to a snapshot key bindings file, so that new features like the above could be added without concern.
