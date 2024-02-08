@@ -120,6 +120,10 @@ You're ready to go! You don't even need to restart your computer. All you need t
 
 [This Reddit post](https://www.reddit.com/r/KeyboardLayouts/comments/wbexkm/comment/ii6pt2d/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) claims that it's possible to use this program to achieve compose rules, via what it calls a ["typed string trigger"](https://wiki.keyboardmaestro.com/trigger/Typed_String). But this program looks like it can do a whole hell of a lot more than that, and looks daunting to dig into myself. Feel free to give a shot yourself.
 
+## arrow-hands-keyboard-karabiner
+
+[This project](https://github.com/gkovacs/arrow-hands-keyboard-karabiner) by Geza Kovacs uses the same `compose2keybindings.pl` script from Bob Kåres that I'm using, though makes no modifications to it. It also uses Karabiner-Elements but assumes you have it installed already. He's using the Perl script to convert compose rules from Linux (Ubuntu), but it's an X11 thing so it's the same deal as when they're on Windows.  
+
 # About my compose rules
 
 ## Custom rules in collaboration with Dave Keenan
