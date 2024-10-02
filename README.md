@@ -36,6 +36,7 @@ However it works out for you, if you find a moment, I'd be grateful to receive y
 1. Now you're ready to run XQuartz for what we need to use it for. Open it.
 1. Inside the XQuartz terminal, run `sudo cpan` (and enter your password again). Finally, inside [CPAN](https://www.cpan.org/), run the following three commands to install the libraries the script needs:
    1. `install X11:KeySyms`
+      1. If you have errors installing this one, try [downloading](http://search.cpan.org/CPAN/authors/id/S/SM/SMCCAM/X11-Protocol-0.56.tar.gz) directly and running `perl Makefile.PL`, `make`, and `make install` after unzipping.
    1. `install List::MoreUtils`
    1. `install charnames`
 

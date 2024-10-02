@@ -5188,6 +5188,9 @@ include "%L"
 #<Multi_key> </> <_>		: "⎳"	U23B3	# SUMMATION BOTTOM (infix: Logarithm operator with base on the right) (doesn't work, except in Calibri font)
 #<Multi_key> <^> </>		: "/̂" U002F U0302 # SOLIDUS (slash), COMBINING CIRCUMFLEX ACCENT (hat) (infix: Root operator with degree on the right) (doesn't work, except in Calibri font)
 <Multi_key> <"> <">		: "𝄅𝄅" 1D105 1D105 # MUSICAL SYMBOL SHORT BARLINE (twice) (capital double quote) (overrides ditto mark)
+<Multi_key> <|> <space>	: "¦"	U00A6	# BROKEN BAR
+<Multi_key> <*> <|>		: "∣"	U2223	# DIVIDES OPERATOR
+<Multi_key> <*> <\>		: "⧹"	U29F9	# REVERSE SOLIDUS OPERATOR
 
 
 # James algebra brackets
