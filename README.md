@@ -19,7 +19,7 @@ Five steps:
 
 ## 1. Potentially skip a bunch of steps
 
-If you're happy to use the rules I use, which include my opinionated attempt at incorporating them in with what I could cobble together to simulate the rules built in to WinCompose, then you can simply copy the file `DefaultKeyBinding.dict` from this repo into the `~/Library/KeyBindings/` directory, and skip straight over steps 2, 3, and 4, straight to step 5.
+If you're happy to use the rules I use, which include my opinionated attempt at incorporating them in with what I could cobble together to simulate the rules built in to WinCompose, then you can simply copy the file `DefaultKeyBinding.dict` from this repo into the `~/Library/KeyBindings/` directory (that's `/Users/[your username]/Library/KeyBindings`, which you'll need to create if it doesn't exist), and skip straight over steps 2, 3, and 4, straight to step 5.
 
 ## 2. Setup your computer
 
