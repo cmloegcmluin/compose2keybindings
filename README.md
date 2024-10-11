@@ -21,6 +21,8 @@ Five steps:
 
 If you're happy to use the rules I use, which include my opinionated attempt at incorporating them in with what I could cobble together to simulate the rules built in to WinCompose, then you can simply copy the file `DefaultKeyBinding.dict` from this repo into the `~/Library/KeyBindings/` directory (that's `/Users/[your username]/Library/KeyBindings`, which you'll need to create if it doesn't exist, and it may possibly exist but be hidden), and skip straight over steps 2, 3, and 4, straight to step 5.
 
+(Note: to download the file from GitHub, make sure to download the file itself, as opposed to the HTML webpage displaying the file. You can do this using the "Download raw file" button on the page for the file, or by clicking the "Raw" button and downloading from there.)
+
 ## 2. Setup your computer
 
 I'll admit: I struggled to figure out how to run Bob's script. It's quite possible that absolutely none of the following steps I took were necessary for me to take, and/or won't be necessary for you to take. So if you're hopeful or in a hurry, I suggest you try your luck skipping straight to the [Running the script](#running-the-script) section below, and only refer to this record here of all the things I tried if you get stuck. One or all of them might make the difference. 
