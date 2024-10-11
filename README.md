@@ -19,9 +19,11 @@ Five steps:
 
 ## 1. Potentially skip a bunch of steps
 
-If you're happy to use the rules I use, which include my opinionated attempt at incorporating them in with what I could cobble together to simulate the rules built in to WinCompose, then you can simply copy the file `DefaultKeyBinding.dict` from this repo into the `~/Library/KeyBindings/` directory (that's `/Users/[your username]/Library/KeyBindings`, which you'll need to create if it doesn't exist, and it may possibly exist but be hidden), and skip straight over steps 2, 3, and 4, straight to step 5.
+If you're happy to use the rules I use, which include my opinionated attempt at incorporating them in with what I could cobble together to simulate the rules built in to WinCompose, then you can simply copy the file `DefaultKeyBinding.dict` from this repo into the `~/Library/KeyBindings/` directory, and skip straight over steps 2, 3, and 4, straight to step 5.
 
-(Note: to download the file from GitHub, make sure to download the file itself, as opposed to the HTML webpage displaying the file. You can do this using the "Download raw file" button on the page for the file, or by clicking the "Raw" button and downloading from there.)
+(Note: `~/Library/KeyBindings/` is shorthand for `/Users/[your username]/Library/KeyBindings`. Your user Library folder (`~/Library` or `/Users/[your username]/Library`) should exist already but it may be hidden. If it is hidden, then you will need to reveal it by using the Finder menu bar to choose Action (or View in some OS versions) → Show View Options → Show Library Folder. Then, once you enter that folder, if the `KeyBindings` subfolder does not yet exist, you will need to create it.)
+
+(Additional note: to download the file from GitHub, make sure to download the file itself, as opposed to the HTML webpage displaying the file. You can do this using the "Download raw file" button on the page for the file, or by clicking the "Raw" button and downloading from there.)
 
 ## 2. Setup your computer
 
