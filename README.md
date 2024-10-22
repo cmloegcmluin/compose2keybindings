@@ -267,6 +267,10 @@ The script also now similarly errors if you define two compose rules with the sa
 
 The compose rules built in to WinCompose included a group that isn't included in the [`X11::Keysyms` module](https://metacpan.org/pod/X11::Keysyms), despite being included in the X11 Window System Protocol" standard. I added them manually, and you can follow the pattern I set if you need to need to add more yourself (all revisions to the Perl code are marked with a comment including their revision number, so just search `# REVISION 10` and you'll find this one).
 
+## 11. Support newlines
+
+Previously, rules inserting newlines on Windows would insert literally `\n` on Mac. I've fixed that.
+
 # Possible future features
 
 ## Include entire commented out lines

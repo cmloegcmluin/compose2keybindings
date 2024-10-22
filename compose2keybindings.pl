@@ -302,8 +302,7 @@ sub output {
 	}
 	else {
 		# REVISION 2
-		printf '("insertText:", "%s");', 
-			join '', 
+		my $insertion = join '', 
 			map {
 				my $ord = ord($_);
 				# REVISION 3
@@ -314,7 +313,12 @@ sub output {
 				} else {
 					sprintf "\\U%04X", $ord;
 				}
-			} split //, $data->[0];		
+			} split //, $data->[0];
+			
+		# REVISION 11
+		$insertion =~ s/\\U005C\\U006E/\\U000A/g;
+		printf '("insertText:", "%s");', $insertion;
+
 		print ' /* ';
 		print join(', ', map { ord $_ == $composekey ? 'Compose' : charnames::viacode(ord $_) // 'unknown' } @stack);
 		print ':';
